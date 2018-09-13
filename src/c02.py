@@ -23,50 +23,25 @@ class Solution:
         :type l2: ListNode
         :rtype: ListNode
         """
-        result = []
-        # root = ListNode()
+        str1 = str2 = ""
+        while l1:
+            str1 = str1 + str(l1.val)
+            l1 = l1.next
+        while l2:
+            str2 = str2 + str(l2.val)
+            l2 = l2.next
 
-        tempSum = l1.val + l2.val
-        quotient = tempSum//10
-        remainder = tempSum % 10
-        result.append(remainder)
+        result = int(str1[::-1]) + int(str2[::-1])
+        result = str(result)[::-1]
 
-        # nextNode = ListNode()
-        # root.val = remainder
-        # root.next = nextNode
+        root = ListNode(0)
+        pointer = root
+        for number in result:
+            pointer.next = ListNode(number)
+            pointer = pointer.next
 
-        while l1.next is not None or l2.next is not None:
-
-            if l1.next is not None:
-                l1 = l1.next
-            else:
-                l1 = ListNode(0)
-
-            if l2.next is not None:
-                l2 = l2.next
-            else:
-                l2 = ListNode(0)
-
-            tempSum = l1.val + l2.val + quotient
-            quotient = tempSum // 10
-            remainder = tempSum % 10
-            result.append(remainder)
-            #
-            # nextNode.val = remainder
-            # nextNode.next = ListNode()
-
-        if remainder == 1:
-            result.append(remainder)
-        #
-        # res_list = ListNode()
-        #
-        # for index, item in result:
-        #     res_list.val = item
-        #     res_list = res_list.next
-        #
-        print('result', result)
-        # print(listNodeToString(l1))
-        return
+        pointer = root.next
+        return pointer
 
 
 def stringToIntegerList(input):
