@@ -32,6 +32,7 @@ class Solution:
             else:
                 return 0
 
+
 def main():
     import sys
     import io
