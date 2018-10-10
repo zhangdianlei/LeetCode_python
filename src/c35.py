@@ -17,7 +17,7 @@ class Solution:
         :type target: int
         :rtype: int
         """
-        nums = [1]
+        nums = [1, 2, 3, 4, 5]
         start = 0
         end = len(nums) - 1
 
