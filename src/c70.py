@@ -15,7 +15,6 @@ def Fibonacci_Yield_tool(n):
         a, b = b, a + b
         n -= 1
 
-
 def climbStairs(n):
     """
     :type n: int
