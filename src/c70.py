@@ -26,3 +26,4 @@ def climbStairs(n):
 
 if __name__ == '__main__':
     print(climbStairs(5))
+
