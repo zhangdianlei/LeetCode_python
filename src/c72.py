@@ -18,20 +18,24 @@ def minDistance(word1, word2):
     m = len(word1) + 1
     n = len(word2) + 1
 
-    arr = m * [[0] * n]
+    arr = [[0] * n for i in range(m)]
 
-    pointer = 0
+    row = [i for i in range(n)]
+    arr[0] = row
     for i in range(m):
-        arr[i][0] = pointer
-        pointer += 1
+        arr[i][0] = i
 
-    # for i in range(n):
-    #     arr[0][i] = i
+    for i in range(len(word1)):
+        for j in range(len(word2)):
+            if word1[i] == word2[j]:
+                arr[i + 1][j + 1] = arr[i][j]
+            else:
+                arr[i + 1][j + 1] = min(arr[i][j + 1], arr[i + 1][j], arr[i][j]) + 1
 
-    print(arr)
+    return arr[m - 1][n - 1]
 
 
 if __name__ == '__main__':
-    word1 = "horse"
-    word2 = "ros"
+    word1 = "ros"
+    word2 = "horse"
     print(minDistance(word1, word2))
