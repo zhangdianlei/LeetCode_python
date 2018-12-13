@@ -13,17 +13,34 @@ def isInterleave(s1, s2, s3):
     :type s3: str
     :rtype: bool
     """
-    s1Arr = []
-    pointer = 0
+    if s1 == s2 == s3 == "":
+        return True
 
-    for index, item in enumerate(s1):
-        if s3.find(item, pointer) != -1:
-            s1Arr.append(s3.find(item, pointer))
-        else:
-            return False
-        pointer = index + 1
+    if len(s1) + len(s2) != len(s3):
+        return False
 
-    print('s1arr', s1Arr)
+    # 初始化矩阵
+    matrix = []
+    for i in range(len(s1) + 1):
+        matrix.append([False] * (len(s2) + 1))
+
+    matrix[0][0] = True
+
+    # 初始化边缘
+    for i in range(1, len(s1) + 1):
+        matrix[i][0] = (matrix[i - 1][0] and (s1[i - 1] == s3[i - 1]))
+
+    for j in range(1, len(s2) + 1):
+        matrix[0][j] = (matrix[0][j - 1] and (s2[j - 1] == s3[j - 1]))
+
+    # 循环计算每个节点是否可达
+    for i in range(1, len(s1) + 1):
+        for j in range(1, len(s2) + 1):
+            top = matrix[i - 1][j] and s1[i - 1] == s3[i - 1 + j]
+            left = matrix[i][j - 1] and s2[j - 1] == s3[j - 1 + i]
+            matrix[i][j] = top or left
+
+    return matrix[len(s1)][len(s2)]
 
 
 if __name__ == '__main__':
@@ -31,4 +48,4 @@ if __name__ == '__main__':
     s2 = "dbbca"
     s3 = "aadbbcbcac"
 
-    isInterleave(s1, s2, s3)
+    print(isInterleave(s1, s2, s3))
